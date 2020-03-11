@@ -1,10 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Application.Activities;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace API.Controllers
 {
@@ -19,9 +20,9 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> List()
+        public async Task<ActionResult<List<Activity>>> List(CancellationToken ct)
         {
-            return await _mediator.Send(new List.Query());
+            return await _mediator.Send(new List.Query(), ct);
         }
 
         [HttpGet("{id}")]

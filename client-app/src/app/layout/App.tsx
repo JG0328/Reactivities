@@ -1,10 +1,13 @@
 import React, {useEffect, useContext} from "react";
 import {Container} from "semantic-ui-react";
 import NavBar from "../../features/nav/NavBar";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
 import LoadingComponent from "./LoadingComponent";
 import ActivityStore from "../stores/activityStore";
 import {observer} from 'mobx-react-lite';
+import {Route} from 'react-router-dom';
+import HomePage from "../../features/HomePage";
+import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
+import ActivityForm from "../../features/activities/form/ActivityForm";
 
 const App = () => {
     const activityStore = useContext(ActivityStore);
@@ -19,7 +22,9 @@ const App = () => {
         <React.Fragment>
             <NavBar/>
             <Container style={{marginTop: "7em"}}>
-                <ActivityDashboard/>
+                <Route exact path={'/'} component={HomePage}/>
+                <Route path={'/activities'} component={ActivityDashboard}/>
+                <Route path={'/createActivity'} component={ActivityForm}/>
             </Container>
         </React.Fragment>
     );

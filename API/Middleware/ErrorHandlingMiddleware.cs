@@ -26,7 +26,7 @@ namespace API.Middleware
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex, logger); _
+                await HandleExceptionAsync(context, ex, logger);
             }
         }
 

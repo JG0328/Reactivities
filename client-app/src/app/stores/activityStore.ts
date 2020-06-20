@@ -40,7 +40,6 @@ class ActivityStore {
             this.loadingInitial = false;
         } catch (error) {
             runInAction('load activities error', () => {
-                console.log(error);
                 this.loadingInitial = false;
             });
         }
@@ -62,8 +61,7 @@ class ActivityStore {
             } catch (error) {
                 runInAction('Get Activity error', () => {
                     this.loadingInitial = false;
-                })
-                console.log(error);
+                });
             }
         }
     }
@@ -88,7 +86,6 @@ class ActivityStore {
             runInAction('create activity error', () => {
                 this.submitting = false;
             });
-            console.log(error);
         }
     };
 
@@ -105,7 +102,6 @@ class ActivityStore {
             runInAction('edit activity error', () => {
                 this.submitting = false;
             });
-            console.log(error);
         }
     };
 
@@ -124,7 +120,6 @@ class ActivityStore {
                 this.submitting = false;
                 this.target = '';
             });
-            console.log(error);
         }
     };
 }

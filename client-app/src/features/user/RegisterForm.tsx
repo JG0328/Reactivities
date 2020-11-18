@@ -1,4 +1,4 @@
-﻿import React, { useContext } from "react";
+import React, { useContext } from "react";
 import { Form as FinalForm, Field } from 'react-final-form';
 import { Button, Form, Header } from "semantic-ui-react";
 import TextInput from "../../app/common/form/TextInput";
@@ -9,23 +9,35 @@ import { combineValidators, isRequired } from "revalidate";
 import ErrorMessage from "../../app/common/form/ErrorMessage";
 
 const validate = combineValidators({
+    username: isRequired('username'),
+    displayName: isRequired('display name'),
     email: isRequired('email'),
     password: isRequired('password')
 })
 
-const LoginForm = () => {
+const RegisterForm = () => {
     const rootStore = useContext(RootStoreContext);
-    const { login } = rootStore.userStore;
+    const { register } = rootStore.userStore;
 
     return (
         <FinalForm
-            onSubmit={(values: IUserFormValues) => login(values).catch(error => ({
+            onSubmit={(values: IUserFormValues) => register(values).catch(error => ({
                 [FORM_ERROR]: error
             }))}
             validate={validate}
             render={({ handleSubmit, submitting, submitError, invalid, pristine, dirtySinceLastSubmit }) => (
                 <Form onSubmit={handleSubmit} error>
-                    <Header as={"h2"} content={"Login to Reactivities"} color={"teal"} textAlign={"center"} />
+                    <Header as={"h2"} content={"Sign up to Reactivities"} color={"teal"} textAlign={"center"} />
+                    <Field
+                        name={'username'}
+                        component={TextInput}
+                        placeholder={"Username"}
+                    />
+                    <Field
+                        name={'displayName'}
+                        component={TextInput}
+                        placeholder={"Display Name"}
+                    />
                     <Field
                         name={'email'}
                         component={TextInput}
@@ -38,13 +50,15 @@ const LoginForm = () => {
                         type={"password"}
                     />
                     {submitError && !dirtySinceLastSubmit && (
-                        <ErrorMessage error={submitError} text={'Invalid email or password'} />
+                        <ErrorMessage
+                            error={submitError}
+                        />
                     )}
-                    <Button color={"teal"} disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} positive content={"Login"} fluid />
+                    <Button color={"teal"} disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} positive content={"Register"} fluid />
                 </Form>
             )}
         />
     )
 }
 
-export default LoginForm;
+export default RegisterForm;

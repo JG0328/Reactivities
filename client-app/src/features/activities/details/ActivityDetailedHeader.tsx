@@ -48,9 +48,7 @@ const ActivityDetailedHeader: React.FC<{ activity: IActivity }> = ({ activity })
                     </Button>
                 ) : activity.isGoing ? (
                     <Button>Cancel attendance</Button>
-                ) : (
-                            <Button color='teal'>Join Activity</Button>
-                        )}
+                ) : (<Button color='teal'>Join Activity</Button>)}
             </Segment>
         </Segment.Group>
     )
